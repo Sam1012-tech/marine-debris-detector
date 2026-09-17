@@ -1,0 +1,946 @@
+{
+    "metadata": {
+        "version": "2.0",
+        "description": "Rule-based marine debris accumulation risk scores for Indian coastal zones",
+        "methodology": "Weighted heuristic combining port proximity, fishing harbor density, river-mouth debris inflow, shipping traffic, and shallow bathymetry",
+        "scale": "0.0 (minimal risk) to 1.0 (highest risk)"
+    },
+    "risk_zones": [
+        {
+            "id": "RZ-001",
+            "lat": 22.7500,
+            "lng": 70.0200,
+            "intensity": 0.86,
+            "zone_name": "Kandla Port (Deendayal)",
+            "risk_level": "Critical",
+            "factors": [
+                "India's largest port by volume",
+                "Gulf of Kutch tidal debris trapping",
+                "High industrial cargo spillage"
+            ]
+        },
+        {
+            "id": "RZ-002",
+            "lat": 22.7333,
+            "lng": 69.7167,
+            "intensity": 0.82,
+            "zone_name": "Mundra Port",
+            "risk_level": "High",
+            "factors": [
+                "Major commercial shipping hub",
+                "Heavy vessel traffic",
+                "Container loss risk"
+            ]
+        },
+        {
+            "id": "RZ-003",
+            "lat": 22.4667,
+            "lng": 69.0667,
+            "intensity": 0.65,
+            "zone_name": "Gulf of Kutch Marine Park",
+            "risk_level": "Moderate",
+            "factors": [
+                "Shallow coral reef zone",
+                "Tidal debris accumulation",
+                "Fishing gear entanglement"
+            ]
+        },
+        {
+            "id": "RZ-004",
+            "lat": 22.2333,
+            "lng": 68.9667,
+            "intensity": 0.58,
+            "zone_name": "Dwarka Coast",
+            "risk_level": "Moderate",
+            "factors": [
+                "Pilgrimage & tourism debris",
+                "Coastal fishing activity",
+                "Submerged archaeological sites"
+            ]
+        },
+        {
+            "id": "RZ-005",
+            "lat": 21.6333,
+            "lng": 69.6000,
+            "intensity": 0.52,
+            "zone_name": "Porbandar Coast",
+            "risk_level": "Low",
+            "factors": [
+                "Moderate fishing harbour",
+                "Coastal currents disperse debris",
+                "Minor industrial runoff"
+            ]
+        },
+        {
+            "id": "RZ-006",
+            "lat": 20.9000,
+            "lng": 70.3667,
+            "intensity": 0.88,
+            "zone_name": "Veraval Fishing Harbour",
+            "risk_level": "Critical",
+            "factors": [
+                "India's largest fish landing centre",
+                "Massive ghost net generation",
+                "Abandoned gear accumulation"
+            ]
+        },
+        {
+            "id": "RZ-007",
+            "lat": 20.7167,
+            "lng": 70.9833,
+            "intensity": 0.45,
+            "zone_name": "Diu Island Coast",
+            "risk_level": "Low",
+            "factors": [
+                "Tourism-related plastics",
+                "Relatively clean offshore waters",
+                "Low commercial traffic"
+            ]
+        },
+        {
+            "id": "RZ-008",
+            "lat": 21.4000,
+            "lng": 72.1833,
+            "intensity": 0.94,
+            "zone_name": "Alang Ship-Breaking Yard",
+            "risk_level": "Critical",
+            "factors": [
+                "World's largest ship-breaking yard",
+                "Submerged metal wreckage",
+                "Oil, chemical, and ghost anchor debris"
+            ]
+        },
+        {
+            "id": "RZ-009",
+            "lat": 21.7500,
+            "lng": 72.1500,
+            "intensity": 0.72,
+            "zone_name": "Bhavnagar Creek",
+            "risk_level": "High",
+            "factors": [
+                "Tidal funneling of debris",
+                "Industrial runoff",
+                "Lock-gate commercial traffic"
+            ]
+        },
+        {
+            "id": "RZ-010",
+            "lat": 21.6667,
+            "lng": 72.5500,
+            "intensity": 0.81,
+            "zone_name": "Narmada River Estuary",
+            "risk_level": "High",
+            "factors": [
+                "Major terrestrial macroplastic inflow",
+                "Estuarine deposition rates",
+                "Industrial corridor runoff"
+            ]
+        },
+        {
+            "id": "RZ-011",
+            "lat": 21.1667,
+            "lng": 72.6333,
+            "intensity": 0.78,
+            "zone_name": "Hazira Port & Tapi Estuary",
+            "risk_level": "High",
+            "factors": [
+                "Heavy industrial port activity",
+                "River debris discharge",
+                "LNG terminal exclusion zones"
+            ]
+        },
+        {
+            "id": "RZ-012",
+            "lat": 20.4167,
+            "lng": 72.8333,
+            "intensity": 0.48,
+            "zone_name": "Daman Coast",
+            "risk_level": "Low",
+            "factors": [
+                "Tourism plastics",
+                "Daman Ganga river discharge",
+                "Minor fishing"
+            ]
+        },
+        {
+            "id": "RZ-013",
+            "lat": 19.8000,
+            "lng": 72.6500,
+            "intensity": 0.66,
+            "zone_name": "Tarapur Offshore",
+            "risk_level": "Moderate",
+            "factors": [
+                "Industrial cooling water outfalls",
+                "Coastal currents trap plastics",
+                "Fishing activity"
+            ]
+        },
+        {
+            "id": "RZ-014",
+            "lat": 19.3333,
+            "lng": 72.8000,
+            "intensity": 0.74,
+            "zone_name": "Vasai Creek Mouth",
+            "risk_level": "High",
+            "factors": [
+                "Heavy urban sewage outfall",
+                "Mangrove debris entanglement",
+                "Local fishing nets"
+            ]
+        },
+        {
+            "id": "RZ-015",
+            "lat": 19.1000,
+            "lng": 72.8167,
+            "intensity": 0.79,
+            "zone_name": "Juhu / Versova Beach Coast",
+            "risk_level": "High",
+            "factors": [
+                "Severe urban coastal debris",
+                "Mithi river plastic outfall",
+                "Monsoon wash-up zone"
+            ]
+        },
+        {
+            "id": "RZ-016",
+            "lat": 18.9500,
+            "lng": 72.9500,
+            "intensity": 0.95,
+            "zone_name": "Mumbai Port / JNPT",
+            "risk_level": "Critical",
+            "factors": [
+                "Dense commercial shipping traffic",
+                "Highest container volume in India",
+                "Industrial debris and oil residue"
+            ]
+        },
+        {
+            "id": "RZ-017",
+            "lat": 18.9100,
+            "lng": 72.8300,
+            "intensity": 0.84,
+            "zone_name": "Sassoon Dock Fishing Harbor",
+            "risk_level": "High",
+            "factors": [
+                "Massive active fishing harbour",
+                "Discarded netting & ghost gear",
+                "Proximity to Mumbai shipping lanes"
+            ]
+        },
+        {
+            "id": "RZ-018",
+            "lat": 18.6333,
+            "lng": 72.8667,
+            "intensity": 0.55,
+            "zone_name": "Alibaug Coast",
+            "risk_level": "Moderate",
+            "factors": [
+                "Tourism ferry traffic",
+                "Coastal recreational debris",
+                "Moderate fishing"
+            ]
+        },
+        {
+            "id": "RZ-019",
+            "lat": 16.9833,
+            "lng": 73.2667,
+            "intensity": 0.62,
+            "zone_name": "Ratnagiri Port",
+            "risk_level": "Moderate",
+            "factors": [
+                "Regional fishing hub",
+                "Breakwater debris accumulation",
+                "Coastal shipping"
+            ]
+        },
+        {
+            "id": "RZ-020",
+            "lat": 16.0500,
+            "lng": 73.4667,
+            "intensity": 0.68,
+            "zone_name": "Malvan Marine Sanctuary",
+            "risk_level": "Moderate",
+            "factors": [
+                "Sindhudurg fort tourism",
+                "Coral reef ghost net risk",
+                "Traditional fishing gear"
+            ]
+        },
+        {
+            "id": "RZ-021",
+            "lat": 15.5000,
+            "lng": 73.7667,
+            "intensity": 0.64,
+            "zone_name": "Mandovi Estuary, Goa",
+            "risk_level": "Moderate",
+            "factors": [
+                "Casino vessel zone",
+                "Mining barge traffic",
+                "Tourism waste and river debris"
+            ]
+        },
+        {
+            "id": "RZ-022",
+            "lat": 15.4167,
+            "lng": 73.8000,
+            "intensity": 0.77,
+            "zone_name": "Mormugao Port",
+            "risk_level": "High",
+            "factors": [
+                "Iron ore shipping operations",
+                "Zuari river mouth discharge",
+                "Heavy vessel anchoring"
+            ]
+        },
+        {
+            "id": "RZ-023",
+            "lat": 14.8167,
+            "lng": 74.1167,
+            "intensity": 0.54,
+            "zone_name": "Karwar Naval Base Coast",
+            "risk_level": "Low",
+            "factors": [
+                "Naval vessel activity",
+                "Kali river mouth",
+                "Regulated waters limit fishing"
+            ]
+        },
+        {
+            "id": "RZ-024",
+            "lat": 14.5333,
+            "lng": 74.3000,
+            "intensity": 0.42,
+            "zone_name": "Gokarna Coast",
+            "risk_level": "Low",
+            "factors": [
+                "Beach tourism plastics",
+                "Rocky coastal trapping",
+                "Minimal commercial shipping"
+            ]
+        },
+        {
+            "id": "RZ-025",
+            "lat": 14.0167,
+            "lng": 74.3167,
+            "intensity": 0.69,
+            "zone_name": "Netrani Island Reef",
+            "risk_level": "Moderate",
+            "factors": [
+                "Coral reef ecosystem",
+                "Dive tourism debris",
+                "Fishing net entanglement on reef"
+            ]
+        },
+        {
+            "id": "RZ-026",
+            "lat": 13.3500,
+            "lng": 74.6833,
+            "intensity": 0.75,
+            "zone_name": "Malpe Fishing Harbour",
+            "risk_level": "High",
+            "factors": [
+                "Largest fishing harbour in Karnataka",
+                "Purse seine net disposal",
+                "High ALDFG (Ghost gear) rate"
+            ]
+        },
+        {
+            "id": "RZ-027",
+            "lat": 12.9167,
+            "lng": 74.8000,
+            "intensity": 0.81,
+            "zone_name": "New Mangalore Port",
+            "risk_level": "High",
+            "factors": [
+                "Major commercial port",
+                "Netravati & Gurupur river mouths",
+                "Petrochemical shipping"
+            ]
+        },
+        {
+            "id": "RZ-028",
+            "lat": 12.5000,
+            "lng": 74.9833,
+            "intensity": 0.50,
+            "zone_name": "Kasaragod Coast",
+            "risk_level": "Low",
+            "factors": [
+                "Chandragiri river mouth",
+                "Moderate traditional fishing",
+                "Low industrial activity"
+            ]
+        },
+        {
+            "id": "RZ-029",
+            "lat": 11.8667,
+            "lng": 75.3500,
+            "intensity": 0.57,
+            "zone_name": "Kannur / Azhikkal Port",
+            "risk_level": "Moderate",
+            "factors": [
+                "Valapattanam river estuary",
+                "Developing maritime port",
+                "Coastal fishing fleet"
+            ]
+        },
+        {
+            "id": "RZ-030",
+            "lat": 11.1667,
+            "lng": 75.8000,
+            "intensity": 0.67,
+            "zone_name": "Beypore Fishing Harbour",
+            "risk_level": "Moderate",
+            "factors": [
+                "Major traditional harbour",
+                "Boat-building debris",
+                "Chaliyar river discharge"
+            ]
+        },
+        {
+            "id": "RZ-031",
+            "lat": 10.1833,
+            "lng": 76.1667,
+            "intensity": 0.83,
+            "zone_name": "Munambam Deep-Sea Harbour",
+            "risk_level": "High",
+            "factors": [
+                "Major deep-sea fishing base",
+                "Indo-Pacific trawling fleet",
+                "Heavy fishing gear disposal"
+            ]
+        },
+        {
+            "id": "RZ-032",
+            "lat": 9.9667,
+            "lng": 76.2500,
+            "intensity": 0.90,
+            "zone_name": "Cochin Port / Kochi",
+            "risk_level": "Critical",
+            "factors": [
+                "Major international port",
+                "Periyar river & backwater flushing",
+                "Dense shipping and fishing crossover"
+            ]
+        },
+        {
+            "id": "RZ-033",
+            "lat": 9.4833,
+            "lng": 76.3167,
+            "intensity": 0.65,
+            "zone_name": "Alappuzha Coast",
+            "risk_level": "Moderate",
+            "factors": [
+                "Backwater-sea interface",
+                "Tourism houseboats debris",
+                "Coir industry waste"
+            ]
+        },
+        {
+            "id": "RZ-034",
+            "lat": 8.8833,
+            "lng": 76.5500,
+            "intensity": 0.70,
+            "zone_name": "Kollam / Neendakara Harbour",
+            "risk_level": "High",
+            "factors": [
+                "Major fishing port",
+                "Ashtamudi lake outflow",
+                "High density mechanized trawlers"
+            ]
+        },
+        {
+            "id": "RZ-035",
+            "lat": 8.3667,
+            "lng": 76.9833,
+            "intensity": 0.76,
+            "zone_name": "Vizhinjam Mega Port",
+            "risk_level": "High",
+            "factors": [
+                "Deepwater transshipment construction",
+                "Altered coastal currents",
+                "Heavy dredging and vessel staging"
+            ]
+        },
+        {
+            "id": "RZ-036",
+            "lat": 8.0833,
+            "lng": 77.5500,
+            "intensity": 0.73,
+            "zone_name": "Kanyakumari Confluence",
+            "risk_level": "High",
+            "factors": [
+                "Three-sea ocean current convergence",
+                "High tourism plastic waste",
+                "Intense local fishing"
+            ]
+        },
+        {
+            "id": "RZ-037",
+            "lat": 8.7667,
+            "lng": 78.1667,
+            "intensity": 0.85,
+            "zone_name": "Tuticorin Port (V.O.C.)",
+            "risk_level": "Critical",
+            "factors": [
+                "Major commercial & industrial port",
+                "Thermal power plant outfall",
+                "Proximity to sensitive marine reserves"
+            ]
+        },
+        {
+            "id": "RZ-038",
+            "lat": 9.0500,
+            "lng": 79.1667,
+            "intensity": 0.89,
+            "zone_name": "Gulf of Mannar Reefs",
+            "risk_level": "Critical",
+            "factors": [
+                "Shallow coral reef trapping debris",
+                "Heavy trawl net damage",
+                "Ghost net accumulation hotspot"
+            ]
+        },
+        {
+            "id": "RZ-039",
+            "lat": 9.2833,
+            "lng": 79.3167,
+            "intensity": 0.87,
+            "zone_name": "Rameswaram / Pamban",
+            "risk_level": "Critical",
+            "factors": [
+                "Major fishing harbour",
+                "Palk Strait shallows trap debris",
+                "Cross-border fishing conflict zone"
+            ]
+        },
+        {
+            "id": "RZ-040",
+            "lat": 9.8333,
+            "lng": 79.2500,
+            "intensity": 0.66,
+            "zone_name": "Palk Bay Trawling Zone",
+            "risk_level": "Moderate",
+            "factors": [
+                "Shallow bay bathymetry",
+                "Heavy bottom trawling",
+                "Discarded gear accumulation"
+            ]
+        },
+        {
+            "id": "RZ-041",
+            "lat": 10.7667,
+            "lng": 79.8500,
+            "intensity": 0.78,
+            "zone_name": "Nagapattinam Fishing Harbour",
+            "risk_level": "High",
+            "factors": [
+                "Major east coast fishing base",
+                "High ghost net generation",
+                "Historical tsunami debris legacy"
+            ]
+        },
+        {
+            "id": "RZ-042",
+            "lat": 10.9333,
+            "lng": 79.8500,
+            "intensity": 0.63,
+            "zone_name": "Kaveri River Estuary",
+            "risk_level": "Moderate",
+            "factors": [
+                "Terrestrial debris discharge",
+                "Agricultural runoff",
+                "Traditional coastal fishing"
+            ]
+        },
+        {
+            "id": "RZ-043",
+            "lat": 11.4333,
+            "lng": 79.7833,
+            "intensity": 0.51,
+            "zone_name": "Pichavaram Mangroves",
+            "risk_level": "Low",
+            "factors": [
+                "Dense mangrove roots trap plastics",
+                "Tourism boating activity",
+                "Ecologically sensitive buffer"
+            ]
+        },
+        {
+            "id": "RZ-044",
+            "lat": 11.7167,
+            "lng": 79.7833,
+            "intensity": 0.71,
+            "zone_name": "Cuddalore SIPCOT Coast",
+            "risk_level": "High",
+            "factors": [
+                "Heavy industrial and chemical outfall",
+                "Uppanar river mouth",
+                "Local mechanized fishing"
+            ]
+        },
+        {
+            "id": "RZ-045",
+            "lat": 11.9333,
+            "lng": 79.8333,
+            "intensity": 0.60,
+            "zone_name": "Pondicherry Coast",
+            "risk_level": "Moderate",
+            "factors": [
+                "Urban coastal tourism",
+                "Artificial reef structures trap nets",
+                "Coastal erosion infrastructure"
+            ]
+        },
+        {
+            "id": "RZ-046",
+            "lat": 13.0500,
+            "lng": 80.2833,
+            "intensity": 0.81,
+            "zone_name": "Chennai Marina & Adyar",
+            "risk_level": "High",
+            "factors": [
+                "Adyar and Cooum urban river outfalls",
+                "Massive city sewage and plastic runoff",
+                "Dense coastal population"
+            ]
+        },
+        {
+            "id": "RZ-047",
+            "lat": 13.0833,
+            "lng": 80.3000,
+            "intensity": 0.93,
+            "zone_name": "Chennai Port",
+            "risk_level": "Critical",
+            "factors": [
+                "Major commercial shipping hub",
+                "Heavy breakwater debris",
+                "Vessel operational waste"
+            ]
+        },
+        {
+            "id": "RZ-048",
+            "lat": 13.2500,
+            "lng": 80.3333,
+            "intensity": 0.85,
+            "zone_name": "Ennore Port (Kamarajar)",
+            "risk_level": "Critical",
+            "factors": [
+                "Industrial coal and cargo port",
+                "Ennore creek severe pollution",
+                "Thermal power plant discharge"
+            ]
+        },
+        {
+            "id": "RZ-049",
+            "lat": 13.4333,
+            "lng": 80.3167,
+            "intensity": 0.59,
+            "zone_name": "Pulicat Lake Mouth",
+            "risk_level": "Moderate",
+            "factors": [
+                "Lagoon tidal flushing",
+                "Debris trapping in shallows",
+                "Bird sanctuary vulnerability"
+            ]
+        },
+        {
+            "id": "RZ-050",
+            "lat": 14.2833,
+            "lng": 80.1333,
+            "intensity": 0.77,
+            "zone_name": "Krishnapatnam Port",
+            "risk_level": "High",
+            "factors": [
+                "Deep-water commercial port",
+                "Heavy industrial expansion",
+                "Coastal cargo traffic"
+            ]
+        },
+        {
+            "id": "RZ-051",
+            "lat": 15.8667,
+            "lng": 80.8667,
+            "intensity": 0.64,
+            "zone_name": "Krishna River Delta",
+            "risk_level": "Moderate",
+            "factors": [
+                "River debris discharge",
+                "Tidal flat accumulation",
+                "Machilipatnam fishing zone"
+            ]
+        },
+        {
+            "id": "RZ-052",
+            "lat": 16.9500,
+            "lng": 82.2667,
+            "intensity": 0.76,
+            "zone_name": "Kakinada & Godavari Estuary",
+            "risk_level": "High",
+            "factors": [
+                "Major prawn trawling base",
+                "Godavari river massive outflow",
+                "Hope Island barrier trapping"
+            ]
+        },
+        {
+            "id": "RZ-053",
+            "lat": 17.6833,
+            "lng": 83.3000,
+            "intensity": 0.91,
+            "zone_name": "Visakhapatnam Port",
+            "risk_level": "Critical",
+            "factors": [
+                "Major commercial port & naval base",
+                "Ship-breaking operations",
+                "High urban and industrial runoff"
+            ]
+        },
+        {
+            "id": "RZ-054",
+            "lat": 17.8833,
+            "lng": 83.4500,
+            "intensity": 0.49,
+            "zone_name": "Bheemunipatnam Coast",
+            "risk_level": "Low",
+            "factors": [
+                "Minor river mouth",
+                "Beach tourism",
+                "Low commercial shipping"
+            ]
+        },
+        {
+            "id": "RZ-055",
+            "lat": 18.3333,
+            "lng": 84.1167,
+            "intensity": 0.44,
+            "zone_name": "Kalingapatnam Coast",
+            "risk_level": "Low",
+            "factors": [
+                "Vamsadhara river mouth",
+                "Traditional fishing",
+                "Open ocean currents disperse debris"
+            ]
+        },
+        {
+            "id": "RZ-056",
+            "lat": 19.2500,
+            "lng": 84.9167,
+            "intensity": 0.58,
+            "zone_name": "Gopalpur Port",
+            "risk_level": "Moderate",
+            "factors": [
+                "Developing commercial port",
+                "Cyclone debris wash-up zone",
+                "Offshore fishing"
+            ]
+        },
+        {
+            "id": "RZ-057",
+            "lat": 19.7333,
+            "lng": 85.5833,
+            "intensity": 0.68,
+            "zone_name": "Chilika Lake Sea Mouth",
+            "risk_level": "Moderate",
+            "factors": [
+                "Asia's largest brackish lagoon outflow",
+                "High fishing gear density",
+                "Current-driven accumulation"
+            ]
+        },
+        {
+            "id": "RZ-058",
+            "lat": 19.8000,
+            "lng": 85.8333,
+            "intensity": 0.61,
+            "zone_name": "Puri Coast",
+            "risk_level": "Moderate",
+            "factors": [
+                "Massive beach tourism waste",
+                "Urban sewage outfalls",
+                "Coastal fishing nets"
+            ]
+        },
+        {
+            "id": "RZ-059",
+            "lat": 20.2667,
+            "lng": 86.6833,
+            "intensity": 0.88,
+            "zone_name": "Paradip Port",
+            "risk_level": "Critical",
+            "factors": [
+                "Major bulk cargo port",
+                "Mahanadi river massive debris discharge",
+                "Cyclone path accumulation"
+            ]
+        },
+        {
+            "id": "RZ-060",
+            "lat": 20.5667,
+            "lng": 86.8500,
+            "intensity": 0.80,
+            "zone_name": "Gahirmatha Marine Sanctuary",
+            "risk_level": "High",
+            "factors": [
+                "Critical turtle nesting ground",
+                "High ghost net entanglement risk",
+                "Ocean currents trap floating debris"
+            ]
+        },
+        {
+            "id": "RZ-061",
+            "lat": 20.7833,
+            "lng": 86.9667,
+            "intensity": 0.73,
+            "zone_name": "Dhamra Port",
+            "risk_level": "High",
+            "factors": [
+                "Deep draft commercial port",
+                "Bhitarkanika mangrove buffer",
+                "Industrial shipping"
+            ]
+        },
+        {
+            "id": "RZ-062",
+            "lat": 21.4333,
+            "lng": 87.0333,
+            "intensity": 0.53,
+            "zone_name": "Chandipur Coast",
+            "risk_level": "Low",
+            "factors": [
+                "Extensive tidal flats trap waste",
+                "Defense testing zone",
+                "Minor fishing"
+            ]
+        },
+        {
+            "id": "RZ-063",
+            "lat": 21.6167,
+            "lng": 87.5333,
+            "intensity": 0.66,
+            "zone_name": "Digha Coast & Subarnarekha Mouth",
+            "risk_level": "Moderate",
+            "factors": [
+                "Major tourism destination debris",
+                "River discharge",
+                "Trawling activity"
+            ]
+        },
+        {
+            "id": "RZ-064",
+            "lat": 22.0167,
+            "lng": 88.0667,
+            "intensity": 0.89,
+            "zone_name": "Haldia Port",
+            "risk_level": "Critical",
+            "factors": [
+                "Major riverine port",
+                "Heavy industrial and petrochemical waste",
+                "Hooghly river funneling debris"
+            ]
+        },
+        {
+            "id": "RZ-065",
+            "lat": 21.6333,
+            "lng": 88.0500,
+            "intensity": 0.79,
+            "zone_name": "Sagar Island / Hooghly Mouth",
+            "risk_level": "High",
+            "factors": [
+                "Ganges delta massive terrestrial runoff",
+                "Tidal trapping of plastics",
+                "Pilgrimage waste"
+            ]
+        },
+        {
+            "id": "RZ-066",
+            "lat": 21.5667,
+            "lng": 88.2667,
+            "intensity": 0.72,
+            "zone_name": "Sundarbans (Bakkhali Coast)",
+            "risk_level": "High",
+            "factors": [
+                "Mangrove root systems trap plastics",
+                "Ghost gear from dense estuarine fishing",
+                "Cyclone debris"
+            ]
+        },
+        {
+            "id": "RZ-067",
+            "lat": 11.6667,
+            "lng": 92.7333,
+            "intensity": 0.65,
+            "zone_name": "Port Blair, Andaman",
+            "risk_level": "Moderate",
+            "factors": [
+                "Island shipping hub",
+                "Tourism & urban runoff",
+                "Historical tsunami debris"
+            ]
+        },
+        {
+            "id": "RZ-068",
+            "lat": 11.9833,
+            "lng": 93.0000,
+            "intensity": 0.40,
+            "zone_name": "Swaraj Dweep (Havelock)",
+            "risk_level": "Low",
+            "factors": [
+                "Reef tourism debris",
+                "Oceanic plastic wash-up",
+                "Low commercial traffic"
+            ]
+        },
+        {
+            "id": "RZ-069",
+            "lat": 7.0000,
+            "lng": 93.9167,
+            "intensity": 0.46,
+            "zone_name": "Great Nicobar (Campbell Bay)",
+            "risk_level": "Low",
+            "factors": [
+                "International shipping lane proximity",
+                "Transnational debris wash-up",
+                "Remote accumulation"
+            ]
+        },
+        {
+            "id": "RZ-070",
+            "lat": 10.8333,
+            "lng": 72.1833,
+            "intensity": 0.51,
+            "zone_name": "Agatti Island, Lakshadweep",
+            "risk_level": "Low",
+            "factors": [
+                "Atoll traps oceanic debris",
+                "Coral reef ghost net risk",
+                "Limited waste management capacity"
+            ]
+        },
+        {
+            "id": "RZ-071",
+            "lat": 10.5667,
+            "lng": 72.6333,
+            "intensity": 0.47,
+            "zone_name": "Kavaratti Island",
+            "risk_level": "Low",
+            "factors": [
+                "Capital island urban runoff",
+                "Lagoon debris accumulation",
+                "Fishing gear"
+            ]
+        },
+        {
+            "id": "RZ-072",
+            "lat": 8.2833,
+            "lng": 73.0500,
+            "intensity": 0.38,
+            "zone_name": "Minicoy Island",
+            "risk_level": "Low",
+            "factors": [
+                "Deep ocean currents",
+                "Minor local fishing",
+                "International oceanic plastic drift"
+            ]
+        }
+    ]
+}

@@ -27,6 +27,11 @@ export default function HeatmapLayer({ points, options = {} }) {
 
         heat.addTo(map);
 
+        // leaflet.heat has no built-in overall-opacity option (minOpacity
+        // only floors the low end) — dial back the canvas itself so the
+        // basemap labels stay legible under dense/critical clusters.
+        if (heat._canvas) heat._canvas.style.opacity = '0.55';
+
         return () => {
             map.removeLayer(heat);
         };

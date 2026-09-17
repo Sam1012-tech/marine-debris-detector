@@ -1,22 +1,26 @@
 import { useEffect, useMemo, useState } from 'react'
-import { getSurvey, getDetections, getHealth, exportAnnotations } from '../api/client.js'
+import { getSurvey, getDetections, getScanLines, getHealth, exportAnnotations } from '../api/client.js'
 import { downloadReportCsv, downloadReportJson } from '../utils/exportReport.js'
 import ConfidenceBadge from '../components/ConfidenceBadge.jsx'
 import { classLabel, isCriticalClass, modelLabel, statusRowTint } from '../utils/taxonomy.js'
+import { buildPdfReport } from '../utils/pdfReport.js'
 
 export default function Reports() {
   const [survey, setSurvey] = useState(null)
   const [detections, setDetections] = useState([])
+  const [scanLines, setScanLines] = useState([])
   const [search, setSearch] = useState('')
   const [classFilter, setClassFilter] = useState('all')
   const [health, setHealth] = useState(null)
   const [exporting, setExporting] = useState(false)
+  const [generatingPdf, setGeneratingPdf] = useState(false)
   const [exportError, setExportError] = useState(null)
   const [selected, setSelected] = useState(() => new Set())
 
   useEffect(() => {
     getSurvey().then(setSurvey)
     getDetections().then(setDetections)
+    getScanLines().then(setScanLines)
     getHealth().then(setHealth).catch(() => {})
   }, [])
 
@@ -34,9 +38,6 @@ export default function Reports() {
     )
   })
 
-  // Selection persists across filter changes, but only checkboxes for rows
-  // currently visible drive "select all" — picking a class filter never
-  // silently drops an already-selected row from the export.
   const selectedInView = filtered.filter((d) => selected.has(d.id))
   const allVisibleSelected = filtered.length > 0 && selectedInView.length === filtered.length
   const exportSet = selected.size > 0 ? detections.filter((d) => selected.has(d.id)) : filtered
@@ -73,6 +74,19 @@ export default function Reports() {
     }
   }
 
+  const handleDirectPdfExport = async () => {
+    setGeneratingPdf(true)
+    setExportError(null)
+    try {
+      await buildPdfReport(survey, exportSet, scanLines)
+    } catch (err) {
+      console.error('PDF export failed:', err)
+      setExportError(`PDF Export failed: ${err.message}`)
+    } finally {
+      setGeneratingPdf(false)
+    }
+  }
+
   const annotatedCount = health?.annotations?.image_count
 
   return (
@@ -84,7 +98,7 @@ export default function Reports() {
         <h1 style={{ fontSize: 28 }}>Detection reports</h1>
         <p style={{ color: 'var(--ink-dim)', marginTop: 8, maxWidth: '68ch' }}>
           Every flagged anomaly, with exact location, bounding dimensions, and classification — exportable as
-          JSON or CSV for the backend or a GIS tool.
+          JSON, CSV, or executive PDF report for the backend or a GIS tool.
         </p>
       </div>
 
@@ -94,43 +108,27 @@ export default function Reports() {
           placeholder="Search by line, site or coordinates…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          style={{
-            flex: 1,
-            minWidth: 220,
-            background: 'var(--panel)',
-            border: '1px solid var(--border-strong)',
-            borderRadius: 10,
-            padding: '10px 14px',
-            fontSize: 13.5,
-            fontFamily: 'var(--font-body)',
-          }}
+          style={{ width: 280, height: 38 }}
         />
-        {classes.map((c) => (
-          <button
-            key={c}
-            type="button"
-            onClick={() => setClassFilter(c)}
-            style={{
-              padding: '9px 14px',
-              border: `1px solid ${classFilter === c ? 'var(--ocean)' : 'var(--border-strong)'}`,
-              borderRadius: 10,
-              fontSize: 13,
-              fontWeight: classFilter === c ? 600 : 400,
-              background: classFilter === c ? 'var(--ocean-tint)' : 'var(--panel)',
-              color: classFilter === c ? 'var(--ocean-deep)' : 'var(--ink-dim)',
-              cursor: 'pointer',
-            }}
-          >
-            {c === 'all' ? 'All classes' : classLabel(c)}
-          </button>
-        ))}
+        <select
+          value={classFilter}
+          onChange={(e) => setClassFilter(e.target.value)}
+          style={{ height: 38, padding: '0 12px' }}
+        >
+          {classes.map((c) => (
+            <option key={c} value={c}>
+              {c === 'all' ? 'All classes' : classLabel(c)}
+            </option>
+          ))}
+        </select>
         {selected.size > 0 && (
-          <span className="mono" style={{ fontSize: 12, color: 'var(--ink-faint)' }}>
-            {selected.size} selected
+          <span style={{ fontSize: 13, color: 'var(--ocean)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            <span>{selected.size} selected for export</span>
             <button
               type="button"
+              className="btn ghost"
               onClick={() => setSelected(new Set())}
-              style={{ marginLeft: 8, background: 'none', border: 'none', color: 'var(--ocean)', cursor: 'pointer', font: 'inherit', padding: 0 }}
+              style={{ fontSize: 12, padding: '3px 8px', height: 'auto' }}
             >
               Clear
             </button>
@@ -142,7 +140,22 @@ export default function Reports() {
         <button type="button" className="btn ghost" onClick={() => downloadReportJson(survey, exportSet)}>
           Export JSON{selected.size > 0 ? ` (${selected.size})` : ''}
         </button>
-        <button type="button" className="btn" onClick={handleExportTraining} disabled={exporting}>
+        <button
+          id="export-pdf-btn"
+          type="button"
+          className="btn"
+          onClick={handleDirectPdfExport}
+          disabled={generatingPdf}
+          style={{
+            background: 'linear-gradient(135deg, #1b4f72 0%, #1b8fc9 100%)',
+            border: 'none',
+            gap: 6,
+            minWidth: 140,
+          }}
+        >
+          {generatingPdf ? 'Generating PDF…' : `🌊 Export PDF${selected.size > 0 ? ` (${selected.size})` : ''}`}
+        </button>
+        <button type="button" className="btn ghost" onClick={handleExportTraining} disabled={exporting}>
           {exporting
             ? 'Exporting…'
             : `Export Training Data${annotatedCount != null ? ` (${annotatedCount} annotated image${annotatedCount === 1 ? '' : 's'})` : ''}`}

@@ -13,12 +13,12 @@
 // Upload page.
 //
 // The exception: detections (and their parent scan line) on
-// L-190/L-194/L-198/L-199 carry deliberately fabricated demo coordinates (a
-// few clusters over the Bay of Bengal off the Chennai coast) so the Map
-// page has something to plot — these are NOT real navigation data, just
-// placeholders for demoing the map's hover-preview / click-to-review
-// interaction. `site` names throughout are similarly illustrative survey
-// block labels, not tied to the fictional survey/vessel below.
+// L-194/L-198/L-199 carry deliberately fabricated demo coordinates (a few
+// clusters in open water off the Chennai coast) so the Map page has
+// something to plot — these are NOT real navigation data, just placeholders
+// for demoing the map's hover-preview / click-to-review interaction.
+// `site` names throughout are similarly illustrative survey block labels,
+// not tied to the fictional survey/vessel below.
 
 import { classLabel, classifyConfidence } from '../utils/taxonomy.js'
 
@@ -30,13 +30,13 @@ export const survey = {
 }
 
 export const scanLines = [
-  { id: "L-190", site: "Chennai Coastal Survey", imageSrc: "/samples/sss-bridge-wreck-9.jpg", detections: 3, topClass: classLabel("non_mine_object"), status: "unreviewed", location: { lat: 13.1512, lon: 80.3634 } },
+  { id: "L-198", site: "Chennai Approach Channel", imageSrc: "/samples/sss-mine11.jpg", detections: 5, topClass: classLabel("mine"), status: "unreviewed", location: { lat: 13.2688, lon: 80.3554 } },
+  { id: "L-203", site: "Ennore Anchorage", imageSrc: "/samples/sss-crabpot1.jpg", detections: 3, topClass: classLabel("crab_pot"), status: "unreviewed", location: null },
   { id: "L-193", site: "Kochi Harbor Channel", imageSrc: "/samples/sss-rod-boat7.jpg", detections: 1, topClass: classLabel("shipwreck"), status: "unreviewed", location: null },
   { id: "L-194", site: "Chennai Offshore Block", imageSrc: "/samples/sss-debris9-nice.jpg", detections: 3, topClass: classLabel("shipwreck"), status: "unreviewed", location: { lat: 13.0206, lon: 80.4223 } },
   { id: "L-195", site: "Lakshadweep Reef Survey", imageSrc: "/samples/sss3.jpg", detections: 1, topClass: classLabel("shipwreck"), status: "unreviewed", location: null },
   { id: "L-196", site: "Netrani Island Approach", imageSrc: "/samples/sss-bicycle5.jpg", detections: 2, topClass: classLabel("shipwreck"), status: "unreviewed", location: null },
   { id: "L-197", site: "Mangalore Port Approach", imageSrc: "/samples/sss2.jpg", detections: 2, topClass: classLabel("shipwreck"), status: "unreviewed", location: null },
-  { id: "L-198", site: "Chennai Approach Channel", imageSrc: "/samples/sss-mine11.jpg", detections: 5, topClass: classLabel("mine"), status: "unreviewed", location: { lat: 13.2688, lon: 80.3104 } },
   { id: "L-199", site: "Chennai Outer Shelf", imageSrc: "/samples/sss1.jpg", detections: 4, topClass: classLabel("non_mine_object"), status: "unreviewed", location: { lat: 12.8912, lon: 80.3924 } },
   { id: "L-200", site: "Visakhapatnam Offshore Block", imageSrc: "/samples/sss-anchor6.jpg", detections: 0, topClass: null, status: "cleared", location: null },
   { id: "L-201", site: "Gulf of Kutch, Sector 2", imageSrc: "/samples/sss-mine4.jpg", detections: 0, topClass: null, status: "cleared", location: null },
@@ -44,57 +44,6 @@ export const scanLines = [
 ]
 
 export const detections = [
-  {
-    id: "det_7ee776722235",
-    lineId: "L-190",
-    site: "Chennai Coastal Survey",
-    class: "non_mine_object",
-    confidence: 0.6736,
-    model: "mine_mine-model",
-    source: 'model',
-    status: classifyConfidence(0.6736, "non_mine_object"),
-    location: { lat: 13.1512, lon: 80.3634 },
-    boundingBoxM: null,
-    areaM2: null,
-    acousticShadowM: null,
-    slantRangeM: null,
-    bboxPct: { top: 0.34523, left: 0.32089, width: 0.06475, height: 0.07016 },
-    timestamp: "2026-09-02T23:10:00Z",
-  },
-  {
-    id: "det_e038cf544578",
-    lineId: "L-190",
-    site: "Chennai Coastal Survey",
-    class: "mine",
-    confidence: 0.4215,
-    model: "mine_mine-model",
-    source: 'model',
-    status: classifyConfidence(0.4215, "mine"),
-    location: { lat: 13.1498, lon: 80.3649 },
-    boundingBoxM: null,
-    areaM2: null,
-    acousticShadowM: null,
-    slantRangeM: null,
-    bboxPct: { top: 0.27368, left: 0.4632, width: 0.03759, height: 0.03019 },
-    timestamp: "2026-09-02T23:10:07Z",
-  },
-  {
-    id: "det_99a79a97dea9",
-    lineId: "L-190",
-    site: "Chennai Coastal Survey",
-    class: "mine",
-    confidence: 0.3198,
-    model: "shipwreck_ship-model",
-    source: 'model',
-    status: classifyConfidence(0.3198, "mine"),
-    location: { lat: 13.1521, lon: 80.3612 },
-    boundingBoxM: null,
-    areaM2: null,
-    acousticShadowM: null,
-    slantRangeM: null,
-    bboxPct: { top: 0.32343, left: 0.00171, width: 0.45943, height: 0.51457 },
-    timestamp: "2026-09-02T23:10:14Z",
-  },
   {
     id: "det_87d93b29fecc",
     lineId: "L-193",
@@ -257,7 +206,7 @@ export const detections = [
     model: "mine_mine-model",
     source: 'model',
     status: classifyConfidence(0.4881, "mine"),
-    location: { lat: 13.2688, lon: 80.3104 },
+    location: { lat: 13.2688, lon: 80.3554 },
     boundingBoxM: null,
     areaM2: null,
     acousticShadowM: null,
@@ -274,7 +223,7 @@ export const detections = [
     model: "mine_mine-model",
     source: 'model',
     status: classifyConfidence(0.4314, "mine"),
-    location: { lat: 13.2701, lon: 80.3122 },
+    location: { lat: 13.2701, lon: 80.3572 },
     boundingBoxM: null,
     areaM2: null,
     acousticShadowM: null,
@@ -291,7 +240,7 @@ export const detections = [
     model: "mine_mine-model",
     source: 'model',
     status: classifyConfidence(0.3976, "mine"),
-    location: { lat: 13.2675, lon: 80.3089 },
+    location: { lat: 13.2675, lon: 80.3539 },
     boundingBoxM: null,
     areaM2: null,
     acousticShadowM: null,
@@ -308,7 +257,7 @@ export const detections = [
     model: "mine_mine-model",
     source: 'model',
     status: classifyConfidence(0.3431, "mine"),
-    location: { lat: 13.2712, lon: 80.3115 },
+    location: { lat: 13.2712, lon: 80.3565 },
     boundingBoxM: null,
     areaM2: null,
     acousticShadowM: null,
@@ -325,7 +274,7 @@ export const detections = [
     model: "mine_mine-model",
     source: 'model',
     status: classifyConfidence(0.2754, "mine"),
-    location: { lat: 13.2693, lon: 80.3097 },
+    location: { lat: 13.2693, lon: 80.3547 },
     boundingBoxM: null,
     areaM2: null,
     acousticShadowM: null,
@@ -400,6 +349,57 @@ export const detections = [
     slantRangeM: null,
     bboxPct: { top: 0.21082, left: 0.55445, width: 0.05747, height: 0.18112 },
     timestamp: "2026-09-02T23:19:21Z",
+  },
+  {
+    id: "det_3f33d9227f40",
+    lineId: "L-203",
+    site: "Ennore Anchorage",
+    class: "crab_pot",
+    confidence: 0.5139,
+    model: "crab_pot_yolo26m",
+    source: 'model',
+    status: classifyConfidence(0.5139, "crab_pot"),
+    location: null,
+    boundingBoxM: null,
+    areaM2: null,
+    acousticShadowM: null,
+    slantRangeM: null,
+    bboxPct: { top: 0.09857, left: 0.3532, width: 0.09506, height: 0.13822 },
+    timestamp: "2026-09-02T23:20:00Z",
+  },
+  {
+    id: "det_144cde16c7de",
+    lineId: "L-203",
+    site: "Ennore Anchorage",
+    class: "crab_pot",
+    confidence: 0.3534,
+    model: "crab_pot_yolo26s",
+    source: 'model',
+    status: classifyConfidence(0.3534, "crab_pot"),
+    location: null,
+    boundingBoxM: null,
+    areaM2: null,
+    acousticShadowM: null,
+    slantRangeM: null,
+    bboxPct: { top: 0.1547, left: 0.01741, width: 0.10085, height: 0.10538 },
+    timestamp: "2026-09-02T23:20:07Z",
+  },
+  {
+    id: "det_624ddbe805dd",
+    lineId: "L-203",
+    site: "Ennore Anchorage",
+    class: "crab_pot",
+    confidence: 0.3485,
+    model: "crab_pot_yolo26s",
+    source: 'model',
+    status: classifyConfidence(0.3485, "crab_pot"),
+    location: null,
+    boundingBoxM: null,
+    areaM2: null,
+    acousticShadowM: null,
+    slantRangeM: null,
+    bboxPct: { top: 0.47516, left: 0.39731, width: 0.1124, height: 0.1026 },
+    timestamp: "2026-09-02T23:20:14Z",
   },
 ]
 

@@ -8,7 +8,16 @@
 // well) or move report generation server-side and point these buttons at
 // a download endpoint instead.
 
-import { classLabel } from './taxonomy.js'
+import { classLabel, isCriticalClass, CONFIDENCE_AUTO_CONFIRM_THRESHOLD } from './taxonomy.js'
+
+// HIGH always wins for a critical class (ordnance/safety) regardless of
+// model confidence — mirrors the "needs-review no matter how confident"
+// rule already applied in classifyConfidence().
+function severityFor(d) {
+  if (isCriticalClass(d.class)) return 'HIGH'
+  if (d.confidence != null && d.confidence >= CONFIDENCE_AUTO_CONFIRM_THRESHOLD) return 'MEDIUM'
+  return 'LOW'
+}
 
 function buildReport(survey, detections) {
   return {
@@ -21,10 +30,12 @@ function buildReport(survey, detections) {
       id: d.id,
       line_id: d.lineId,
       site: d.site,
-      classification: classLabel(d.class),
+      class: classLabel(d.class),
       confidence: d.confidence,
-      status: d.status,
-      location: d.location ? { latitude: d.location.lat, longitude: d.location.lon } : null,
+      severity: severityFor(d),
+      review_status: d.status,
+      latitude: d.location?.lat ?? null,
+      longitude: d.location?.lon ?? null,
       bounding_box: {
         width_m: d.boundingBoxM?.width ?? null,
         height_m: d.boundingBoxM?.height ?? null,
@@ -42,9 +53,10 @@ function toCsv(report) {
     'id',
     'line_id',
     'site',
-    'classification',
+    'class',
     'confidence',
-    'status',
+    'severity',
+    'review_status',
     'latitude',
     'longitude',
     'width_m',
@@ -58,11 +70,12 @@ function toCsv(report) {
     d.id,
     d.line_id,
     d.site,
-    d.classification,
+    d.class,
     d.confidence,
-    d.status,
-    d.location?.latitude ?? '',
-    d.location?.longitude ?? '',
+    d.severity,
+    d.review_status,
+    d.latitude ?? '',
+    d.longitude ?? '',
     d.bounding_box.width_m,
     d.bounding_box.height_m,
     d.bounding_box.area_m2,

@@ -12,6 +12,7 @@ export default function Reports() {
   const [health, setHealth] = useState(null)
   const [exporting, setExporting] = useState(false)
   const [exportError, setExportError] = useState(null)
+  const [selected, setSelected] = useState(() => new Set())
 
   useEffect(() => {
     getSurvey().then(setSurvey)
@@ -32,6 +33,33 @@ export default function Reports() {
       `${d.location?.lon ?? ''}`.includes(q)
     )
   })
+
+  // Selection persists across filter changes, but only checkboxes for rows
+  // currently visible drive "select all" — picking a class filter never
+  // silently drops an already-selected row from the export.
+  const selectedInView = filtered.filter((d) => selected.has(d.id))
+  const allVisibleSelected = filtered.length > 0 && selectedInView.length === filtered.length
+  const exportSet = selected.size > 0 ? detections.filter((d) => selected.has(d.id)) : filtered
+
+  const toggleRow = (id) => {
+    setSelected((prev) => {
+      const next = new Set(prev)
+      next.has(id) ? next.delete(id) : next.add(id)
+      return next
+    })
+  }
+
+  const toggleAllVisible = () => {
+    setSelected((prev) => {
+      const next = new Set(prev)
+      if (allVisibleSelected) {
+        filtered.forEach((d) => next.delete(d.id))
+      } else {
+        filtered.forEach((d) => next.add(d.id))
+      }
+      return next
+    })
+  }
 
   const handleExportTraining = async () => {
     setExporting(true)
@@ -96,11 +124,23 @@ export default function Reports() {
             {c === 'all' ? 'All classes' : classLabel(c)}
           </button>
         ))}
-        <button type="button" className="btn ghost" onClick={() => downloadReportCsv(survey, filtered)}>
-          Export CSV
+        {selected.size > 0 && (
+          <span className="mono" style={{ fontSize: 12, color: 'var(--ink-faint)' }}>
+            {selected.size} selected
+            <button
+              type="button"
+              onClick={() => setSelected(new Set())}
+              style={{ marginLeft: 8, background: 'none', border: 'none', color: 'var(--ocean)', cursor: 'pointer', font: 'inherit', padding: 0 }}
+            >
+              Clear
+            </button>
+          </span>
+        )}
+        <button type="button" className="btn ghost" onClick={() => downloadReportCsv(survey, exportSet)}>
+          Export CSV{selected.size > 0 ? ` (${selected.size})` : ''}
         </button>
-        <button type="button" className="btn ghost" onClick={() => downloadReportJson(survey, filtered)}>
-          Export JSON
+        <button type="button" className="btn ghost" onClick={() => downloadReportJson(survey, exportSet)}>
+          Export JSON{selected.size > 0 ? ` (${selected.size})` : ''}
         </button>
         <button type="button" className="btn" onClick={handleExportTraining} disabled={exporting}>
           {exporting
@@ -115,6 +155,14 @@ export default function Reports() {
           <table>
             <thead>
               <tr>
+                <th style={{ width: 36 }}>
+                  <input
+                    type="checkbox"
+                    checked={allVisibleSelected}
+                    onChange={toggleAllVisible}
+                    aria-label="Select all visible rows"
+                  />
+                </th>
                 <th>Line</th>
                 <th>Site</th>
                 <th>Class</th>
@@ -129,6 +177,14 @@ export default function Reports() {
             <tbody>
               {filtered.map((d) => (
                 <tr key={d.id} className="row-hover" style={{ background: statusRowTint(d.status) }}>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={selected.has(d.id)}
+                      onChange={() => toggleRow(d.id)}
+                      aria-label={`Select detection ${d.id}`}
+                    />
+                  </td>
                   <td className="primary mono">{d.lineId}</td>
                   <td>{d.site}</td>
                   <td>
@@ -156,7 +212,7 @@ export default function Reports() {
               ))}
               {filtered.length === 0 && (
                 <tr>
-                  <td colSpan={9} style={{ color: 'var(--ink-faint)', textAlign: 'center', padding: 24 }}>
+                  <td colSpan={10} style={{ color: 'var(--ink-faint)', textAlign: 'center', padding: 24 }}>
                     No detections match this filter.
                   </td>
                 </tr>

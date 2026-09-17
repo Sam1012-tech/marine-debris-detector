@@ -21,17 +21,19 @@ Current files, all referenced from `mockData.js`:
 
 | File | Scan line |
 |---|---|
-| `sss-bridge-wreck-9.jpg` | L-190 |
+| `sss-mine11.jpg` | L-198 |
+| `sss-crabpot1.jpg` | L-203 |
 | `sss-rod-boat7.jpg` | L-193 |
 | `sss-debris9-nice.jpg` | L-194 |
 | `sss3.jpg` | L-195 |
 | `sss-bicycle5.jpg` | L-196 |
 | `sss2.jpg` | L-197 |
-| `sss-mine11.jpg` | L-198 |
 | `sss1.jpg` | L-199 |
 | `sss-anchor6.jpg` | L-200 (no detections) |
 | `sss-mine4.jpg` | L-201 (no detections) |
 | `sss-tires8.jpg` | L-202 (no detections) |
+
+Table order matches `scanLines` order in `mockData.js`, not filename/line-number order.
 
 `shipwreck1.jpeg` and `shipwreck2.jpeg` are also here, deliberately not
 wired into `mockData.js` — kept as-is for manually testing the real Upload

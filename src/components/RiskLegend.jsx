@@ -1,26 +1,26 @@
-import React from 'react';
-
 export default function RiskLegend() {
-    return (
-        <div className="absolute bottom-5 left-5 z-[1000] bg-slate-900/90 text-white backdrop-blur-md rounded-xl p-3.5 border border-slate-700/60 shadow-xl max-w-[220px]">
-            <div className="text-xs font-semibold text-slate-200 mb-2">
-                Debris Accumulation Risk
-            </div>
-            <div
-                className="w-full h-2.5 rounded-full"
-                style={{
-                    background: 'linear-gradient(to right, #1a237e, #2196f3, #ffeb3b, #ff9800, #d32f2f)'
-                }}
-            />
-            <div className="flex justify-between text-[10px] text-slate-400 mt-1.5 font-medium">
-                <span>Low</span>
-                <span>Mod</span>
-                <span>High</span>
-                <span>Crit</span>
-            </div>
-            <div className="mt-2.5 pt-2 border-t border-slate-800 text-[10px] text-slate-400 leading-tight">
-                Aggregated from port proximity, fishing density, river inflow & bathymetry.
-            </div>
-        </div>
-    );
+  return (
+    <div style={{ background: 'var(--glass)', border: '1px solid var(--border-strong)', borderRadius: 8, padding: '10px 14px', fontSize: 11.5, color: 'var(--ink-dim)', maxWidth: 220 }}>
+      <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--ink)', marginBottom: 8 }}>
+        Debris Accumulation Risk
+      </div>
+      <div
+        style={{
+          width: '100%',
+          height: 8,
+          borderRadius: 999,
+          background: 'linear-gradient(to right, #1a237e, #2196f3, #ffeb3b, #ff9800, #d32f2f)',
+        }}
+      />
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: 'var(--ink-faint)', marginTop: 5, fontWeight: 500 }}>
+        <span>Low</span>
+        <span>Mod</span>
+        <span>High</span>
+        <span>Crit</span>
+      </div>
+      <div style={{ marginTop: 8, paddingTop: 7, borderTop: '1px solid var(--border)', fontSize: 10, color: 'var(--ink-faint)', lineHeight: 1.35 }}>
+        Aggregated from port proximity, fishing density, river inflow & bathymetry.
+      </div>
+    </div>
+  )
 }

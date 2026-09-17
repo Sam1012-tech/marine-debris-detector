@@ -104,7 +104,13 @@ export default function MapView() {
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11.5, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--ocean)', fontWeight: 600, marginBottom: 8 }}>
             Spatial view
           </div>
-          <h1 style={{ fontSize: 28 }}>Detections by location</h1>
+          <h1 style={{ fontSize: 28 }}>
+            {activeView === 'detections'
+              ? 'Detections by location'
+              : activeView === 'risk'
+                ? 'Predicted Accumulation Risk'
+                : 'Detections & Risk Overlay'}
+          </h1>
           <p style={{ color: 'var(--ink-dim)', marginTop: 8, maxWidth: '68ch' }}>
             {activeView === 'detections'
               ? 'GPS coordinates recovered from sonar navigation metadata, plotted on OpenStreetMap.'

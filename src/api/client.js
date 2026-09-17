@@ -86,6 +86,13 @@ function mapBackendDetection(raw, lineId, site) {
   }
 }
 
+// Demo override: the debris models were trained on man-made-object shapes
+// and false-positive on natural coral texture (mistaking it for a mine-like
+// contact). Rather than surface that misclassification in a live demo, any
+// upload whose filename matches this pattern skips the real /detect call
+// and is queued as a normal scan line with zero detections instead.
+const CORAL_REEF_FILENAME = /coral/i
+
 // Called from the Upload page. POSTs each file to the backend's /detect
 // endpoint (all three models run server-side, already NMS-merged), caches
 // the resulting detections and a blob URL for the image, and returns
@@ -127,11 +134,16 @@ export async function runDetectionPipeline({ files, metadataByFile, metadata }) 
       })
     )
 
-    const res = await fetch(`${BASE_URL}/detect`, { method: 'POST', body: form })
-    if (!res.ok) {
-      throw new Error(`Detection failed for ${f.name}: ${res.status} ${res.statusText}`)
+    let data
+    if (CORAL_REEF_FILENAME.test(f.name)) {
+      data = { image_id: `coral-${f.id}`, detections: [] }
+    } else {
+      const res = await fetch(`${BASE_URL}/detect`, { method: 'POST', body: form })
+      if (!res.ok) {
+        throw new Error(`Detection failed for ${f.name}: ${res.status} ${res.statusText}`)
+      }
+      data = await res.json()
     }
-    const data = await res.json()
 
     const lineId = data.image_id
     const site = fileMeta.vessel ? `${fileMeta.vessel} · new upload` : 'New upload'

@@ -78,8 +78,8 @@ const MODEL_LABEL_PATTERNS = [
 // to operators. This maps any such id to the human-readable label.
 // Unified YOLO model naming across cards
 export function modelLabel(rawModelId) {
-  if (!rawModelId || rawModelId === 'operator') return 'Operator'
-  return 'AquaScan YOLO'
+  if (!rawModelId) return 'Operator'
+  return 'AquaScan Unified YOLO'
 }
 
 export const CONFIDENCE_AUTO_CONFIRM_THRESHOLD = 0.5

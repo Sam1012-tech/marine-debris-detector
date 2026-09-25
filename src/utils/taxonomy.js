@@ -76,6 +76,7 @@ const MODEL_LABEL_PATTERNS = [
 
 // Backend model identifiers look like "crabpot_yolo26n" — never shown as-is
 // to operators. This maps any such id to the human-readable label.
+// Unified YOLO model naming across cards
 export function modelLabel(rawModelId) {
   if (!rawModelId) return 'Operator'
   return 'AquaScan Unified YOLO'

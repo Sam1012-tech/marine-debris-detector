@@ -270,14 +270,14 @@ function PanelCard({ step, label, sub, accent, canvasRef, active, onClick }) {
           width: 220,
           height: 270,
           background: '#060e15',
-          border: active ? `2px solid ${accent}` : '1px solid rgba(255,255,255,0.12)',
+          border: active ? `2px solid ${accent}` : '1px solid var(--border-strong)',
           borderRadius: 10,
           overflow: 'hidden',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           transition: 'border-color 0.18s, box-shadow 0.18s',
-          boxShadow: active ? `0 0 22px ${accent}55` : '0 4px 14px rgba(0,0,0,0.4)',
+          boxShadow: active ? `0 0 22px ${accent}55` : '0 2px 8px rgba(15,39,51,0.12)',
         }}
       >
         <canvas
@@ -290,11 +290,11 @@ function PanelCard({ step, label, sub, accent, canvasRef, active, onClick }) {
           }}
         />
       </div>
-      <div style={{ marginTop: 10, fontSize: 12.5, fontWeight: 700, color: '#e8d5a0', textAlign: 'center', lineHeight: 1.3 }}>
+      <div style={{ marginTop: 10, fontSize: 12.5, fontWeight: 700, color: 'var(--ink)', textAlign: 'center', lineHeight: 1.3 }}>
         {label}
       </div>
       {sub && (
-        <div style={{ marginTop: 4, fontSize: 10.5, color: 'rgba(255,255,255,0.42)', fontFamily: 'IBM Plex Mono, monospace', textAlign: 'center', lineHeight: 1.4 }}>
+        <div style={{ marginTop: 4, fontSize: 10.5, color: 'var(--ink-faint)', fontFamily: 'IBM Plex Mono, monospace', textAlign: 'center', lineHeight: 1.4 }}>
           {sub}
         </div>
       )}
@@ -339,8 +339,8 @@ function InfoDrawer({ stage, onClose }) {
     <div
       style={{
         marginTop: 18,
-        background: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,200,0,0.18)',
+        background: 'var(--panel-alt)',
+        border: '1px solid var(--border-strong)',
         borderRadius: 10,
         padding: '16px 20px',
         position: 'relative',
@@ -355,7 +355,7 @@ function InfoDrawer({ stage, onClose }) {
           right: 14,
           background: 'none',
           border: 'none',
-          color: 'rgba(255,255,255,0.45)',
+          color: 'var(--ink-faint)',
           fontSize: 18,
           cursor: 'pointer',
           lineHeight: 1,
@@ -363,13 +363,13 @@ function InfoDrawer({ stage, onClose }) {
       >
         x
       </button>
-      <div style={{ fontSize: 13, fontWeight: 700, color: '#e8d5a0', marginBottom: 8 }}>{info.title}</div>
-      <p style={{ margin: '0 0 12px', fontSize: 12.5, color: 'rgba(255,255,255,0.6)', lineHeight: 1.65 }}>{info.body}</p>
+      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--ink)', marginBottom: 8 }}>{info.title}</div>
+      <p style={{ margin: '0 0 12px', fontSize: 12.5, color: 'var(--ink-dim)', lineHeight: 1.65 }}>{info.body}</p>
       <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
         {info.params.map((p) => (
           <div key={p[0]} style={{ fontSize: 11, fontFamily: 'IBM Plex Mono, monospace' }}>
-            <span style={{ color: 'rgba(255,255,255,0.35)' }}>{p[0]} </span>
-            <span style={{ color: 'rgba(255,255,255,0.85)', fontWeight: 600 }}>{p[1]}</span>
+            <span style={{ color: 'var(--ink-faint)' }}>{p[0]} </span>
+            <span style={{ color: 'var(--ink)', fontWeight: 600 }}>{p[1]}</span>
           </div>
         ))}
       </div>
@@ -470,10 +470,10 @@ export default function PipelineVisualizer({ imageSrc, detections }) {
       style={{
         marginTop: 28,
         padding: '24px 26px 26px',
-        background: 'linear-gradient(160deg, #0d1c27 0%, #071018 100%)',
-        border: '1px solid rgba(180,120,0,0.22)',
+        background: 'var(--panel)',
+        border: '1px solid var(--border-strong)',
         borderRadius: 14,
-        boxShadow: '0 8px 40px rgba(0,0,0,0.5)',
+        boxShadow: '0 4px 20px rgba(15,39,51,0.06)',
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
@@ -488,8 +488,8 @@ export default function PipelineVisualizer({ imageSrc, detections }) {
             </div>
           </div>
           <div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: '#e8d5a0', letterSpacing: '0.02em' }}>Detection Pipeline</div>
-            <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', fontFamily: 'IBM Plex Mono, monospace', marginTop: 2 }}>Click any stage for details</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--ink)', letterSpacing: '0.02em' }}>Detection Pipeline</div>
+            <div style={{ fontSize: 11, color: 'var(--ink-faint)', fontFamily: 'IBM Plex Mono, monospace', marginTop: 2 }}>Click any stage for details</div>
           </div>
         </div>
         {ready ? (

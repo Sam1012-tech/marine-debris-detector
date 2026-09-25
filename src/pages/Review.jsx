@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getScanLines, getDetections, submitAnnotations } from '../api/client.js'
 import AnnotationTool from '../components/AnnotationTool.jsx'
@@ -137,6 +137,17 @@ export default function Review() {
   const [saving, setSaving] = useState(false)
   const [saveNote, setSaveNote] = useState(null)
 
+  const imageColRef = useRef(null)
+  const [imageColHeight, setImageColHeight] = useState(null)
+
+  useEffect(() => {
+    const el = imageColRef.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => setImageColHeight(entry.contentRect.height))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
   const lineId = routeLineId || lines[0]?.id
 
   useEffect(() => {
@@ -244,7 +255,7 @@ export default function Review() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 20 }}>
-        <div>
+        <div style={{ minWidth: 0 }} ref={imageColRef}>
           <AnnotationTool
             imageSrc={line?.imageSrc}
             seed={lineId}
@@ -264,17 +275,14 @@ export default function Review() {
           {saveNote && (
             <div style={{ marginTop: 10, fontSize: 12.5, color: 'var(--ink-dim)' }}>{saveNote}</div>
           )}
-          <PipelineVisualizer
-            imageSrc={line?.imageSrc}
-            detections={detections}
-          />
         </div>
 
-        <div className="card" style={{ height: 'fit-content' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px', borderBottom: '1px solid var(--border)' }}>
+        <div className="card" style={{ height: imageColHeight ? imageColHeight : 'fit-content', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px', borderBottom: '1px solid var(--border)', flex: 'none' }}>
             <h3 style={{ fontSize: 16 }}>Detections</h3>
             <span style={{ fontSize: 12, color: 'var(--ink-faint)' }}>{detections.length} object{detections.length === 1 ? '' : 's'}</span>
           </div>
+          <div style={{ overflowY: 'auto' }}>
           {detections.length === 0 && draftAnnotations.length === 0 && (
             <div style={{ padding: '18px', color: 'var(--ink-faint)', fontSize: 13 }}>No detections on this line.</div>
           )}
@@ -403,8 +411,14 @@ export default function Review() {
               <div style={{ fontSize: 11.5, color: 'var(--ink-faint)' }}>Drawn this session · pending save</div>
             </div>
           ))}
+          </div>
         </div>
       </div>
+
+      <PipelineVisualizer
+        imageSrc={line?.imageSrc}
+        detections={detections}
+      />
     </div>
   )
 }

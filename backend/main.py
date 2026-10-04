@@ -16,6 +16,7 @@ Run:
 import gc
 import io
 import json
+import re
 import time
 import uuid
 import zipfile
@@ -29,7 +30,7 @@ import torch
 torch.set_num_threads(1)
 torch.set_grad_enabled(False)
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from PIL import Image
@@ -55,6 +56,8 @@ import numpy as np
 BASE_DIR = Path(__file__).resolve().parent
 
 # Ensure aquascan_quality module is accessible
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
 if str(BASE_DIR.parent) not in sys.path:
     sys.path.insert(0, str(BASE_DIR.parent))
 if str(BASE_DIR.parent / "aquascan_quality") not in sys.path:
@@ -116,6 +119,14 @@ app.add_middleware(
     # response headers from JS by default unless explicitly exposed.
     expose_headers=["Content-Disposition"],
 )
+
+
+@app.middleware("http")
+async def normalize_slashes(request: Request, call_next):
+    path = request.scope.get("path", "")
+    if "//" in path:
+        request.scope["path"] = re.sub(r"/+", "/", path)
+    return await call_next(request)
 
 
 @app.get("/")

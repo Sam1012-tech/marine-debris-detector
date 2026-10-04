@@ -13,7 +13,7 @@
 import { survey, scanLines, detections, sites } from './mockData.js'
 import { classLabel, classifyConfidence } from '../utils/taxonomy.js'
 
-export const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+export const BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000').replace(/\/+$/, '')
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 

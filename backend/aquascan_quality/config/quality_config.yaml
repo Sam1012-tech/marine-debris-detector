@@ -1,0 +1,31 @@
+mission:
+  profile_name: "Standard_SideScan_Hydrographic_Audit"
+  version: "1.0.0"
+
+thresholds:
+  saturation:
+    intensity_cutoff: 250         # Pixel values >= 250 are considered clipped/saturated
+    max_allowed_ratio: 0.08       # Warning triggered if > 8.0% of tile pixels are saturated
+    penalty_weight: 0.35          # Maximum score penalty contribution
+  
+  dropout:
+    row_intensity_floor: 5.0      # Average row intensity <= 5.0 counts as an acoustic blank/dropout
+    max_allowed_rows: 2           # Warning triggered if > 2 rows exhibit dropout
+    penalty_per_row: 0.08         # Penalty increment per dropped scanline
+    max_penalty_cap: 0.30         # Maximum penalty contribution for dropouts
+
+  dynamic_range:
+    percentile_high: 95.0
+    percentile_low: 5.0
+    min_required_spread: 30.0     # (P95 - P05) must be >= 30.0 grayscale levels
+    penalty_weight: 0.25          # Penalty applied if dynamic range is below minimum
+
+scoring:
+  baseline_score: 1.0
+  pass_threshold: 0.75            # Score >= 0.75 AND zero active flags -> "PASS"
+  warning_threshold: 0.50         # 0.50 <= Score < 0.75 -> "WARNING"; < 0.50 -> "DEGRADED"
+
+metadata_provenance:
+  # MUST explicitly state "image" when computing purely over raster tiles.
+  # If mock IMU/altitude telemetry is injected in downstream stages, change to "telemetry (simulated)"
+  data_source: "image"

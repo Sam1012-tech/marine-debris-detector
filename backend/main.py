@@ -55,6 +55,8 @@ import numpy as np
 BASE_DIR = Path(__file__).resolve().parent
 
 # Ensure aquascan_quality module is accessible
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
 if str(BASE_DIR.parent) not in sys.path:
     sys.path.insert(0, str(BASE_DIR.parent))
 if str(BASE_DIR.parent / "aquascan_quality") not in sys.path:
